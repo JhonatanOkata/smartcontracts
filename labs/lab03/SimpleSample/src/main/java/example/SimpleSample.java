@@ -98,11 +98,18 @@ public class SimpleSample extends ChaincodeBase {
 		}catch(NumberFormatException e ){
 			e.printStackTrace();
 			return "{\"Error\":\"Expecting integer value for amount \"}";
-		}		
+		}	
+
+
+		/*Bank Taxes*/
+		valFrom = valFrom - 1;
+	
 		if(valA>valFrom)
-			return "{\"Error\":\"Insufficient asset holding value for requested transfer amount \"}";
+			return "{\"Error\":\"Insufficient asset holding value for requested transfer amount + taxes \"}";
+
 		valFrom = valFrom-valA;
 		valTo = valTo+valA;
+
 		System.out.println("Transfer "+fromName+">"+toName+" am='"+am+"' new values='"+valFrom+"','"+ valTo+"'");
 		stub.putState(fromName,""+ valFrom);
 		stub.putState(toName, ""+valTo);		
@@ -150,7 +157,7 @@ public class SimpleSample extends ChaincodeBase {
 
 	@Override
 	public String getChaincodeID() {
-		return "SimpleSample";
+		return "Jhonatan";
 	}
 
 	public static void main(String[] args) throws Exception {
